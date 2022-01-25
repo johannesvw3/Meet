@@ -15,12 +15,17 @@ class NumberOfEvents extends Component {
   handleInputChanged = (event) => {
     let value = event.target.value;
     let cleanedValue = this.RemoveNonNumeric(value);
-    if (value < 1 || value > 50 || value !== cleanedValue ) {
+    if (value > 50) {
       this.setState({
         number: cleanedValue,
-        displayErrorText: true,
         errorText: 'Please enter a number between 1 and 50',
       })
+    } else if (value < 1 || value !== cleanedValue) {
+        this.setState({
+          number: cleanedValue,
+          displayErrorText: true,
+          errorText: 'Please enter a number between 1 and 50',
+        })
     } else {
       this.setState({
         number: cleanedValue,
