@@ -26,7 +26,7 @@ class CitySearch extends Component {
 
   this.props.updateEvents(suggestion, number);
 }
-
+ 
   
 
   render() {
@@ -46,7 +46,7 @@ class CitySearch extends Component {
           {this.state.suggestions.map((suggestion) => (
             <li key={suggestion} onClick={() => this.handleItemClicked(suggestion, numberOfEvents)}>{suggestion}</li>
           ))}
-          <li onClick={() => this.handleItemClicked("all")}>
+          <li onClick={() => this.handleItemClicked("all", numberOfEvents)}>
             <b >See all cities</b>
           </li>
         </ul>

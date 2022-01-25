@@ -1,12 +1,8 @@
 import { mockData } from "./mock-data";
 import axios from "axios";
 import NProgress from "nprogress";
+import { extractLocations } from './common';
 
-export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
-};
 
 const checkToken = async (accessToken) => {
   const result = await fetch(
@@ -15,8 +11,8 @@ const checkToken = async (accessToken) => {
     .then((res) => res.json())
     .catch((error) => error.json());
 
-  return result;
-};
+  return result; 
+}; 
 
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {

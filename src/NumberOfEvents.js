@@ -9,7 +9,7 @@ class NumberOfEvents extends Component {
       number: 32
     };
   }
-
+ 
   handleInputChanged = (event) => {
     const value = this.RemoveNonNumeric(event.target.value);
     this.setState({

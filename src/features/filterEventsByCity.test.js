@@ -4,7 +4,7 @@ import React from 'react';
 import App from '../App';
 import { mockData } from '../mock-data';
 import CitySearch from '../CitySearch';
-import { extractLocations } from '../api';
+import { extractLocations } from '../common';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 const locations = extractLocations(mockData);
