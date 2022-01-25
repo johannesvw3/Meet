@@ -133,6 +133,9 @@ input[type="number"] {
   position: fixed;
   top: 20px;
 }
+.number-over-50-error {
+  margin-left: 80%;
+}
 
 .data-vis-wrapper {
   display: flex;
