@@ -5,7 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from "./api";
 import { extractLocations } from './common';
-import { OfflineAlert } from './Alert';
+import { OfflineAlert } from './lert';
 
 class App extends Component {
  
@@ -56,7 +56,8 @@ class App extends Component {
     const { events, locations, numberOfEvents } = this.state;
     return (
       <div className="App">
-        {!navigator.onLine && <OfflineAlert text={"Offline. New events cannot be loaded until you have an internet connection."} />}
+        {!navigator.onLine ? (<OfflineAlert text="Offline. New events cannot be loaded until you have an internet connection." />) :
+         (<OfflineAlert text=''  />)}
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length}/>
         <EventList events={events} numberOfEvents={numberOfEvents} />
