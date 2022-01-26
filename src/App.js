@@ -5,6 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from "./api";
 import { extractLocations } from './common';
+import { OfflineAlert } from './Alert';
 
 class App extends Component {
  
@@ -58,6 +59,8 @@ class App extends Component {
         <CitySearch locations={locations} numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
         <NumberOfEvents updateNumberOfEvents={number => { this.updateNumberOfEvents(number) }} currentNumberOfEvents={events.length}/>
         <EventList events={events} numberOfEvents={numberOfEvents} />
+        <EventList events={events} />
+        <OfflineAlert text={OfflineAlertText} />
       </div >
     );
   }
