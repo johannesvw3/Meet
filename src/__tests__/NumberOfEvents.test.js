@@ -1,55 +1,48 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import NumberOfEvents from '../NumberOfEvents';
+import React, { Component } from 'react';
+import { ErrorAlert } from './Alert';
 
-describe('<NumberOfEvents /> component', () => {
-  let NumberOfEventsWrapper;
-  beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />);
-  });
+class NumberOfEvents extends Component {
+  state = {
+    numberEvents: 32,
+  };
 
-  test('render number of events elem', () => {
-    expect(NumberOfEventsWrapper.find('.number-of-events')).toHaveLength(1);
-  })
+  handleInputChange = event => {
+    const value = event.target.value;
 
-  test('render number of events label', () => {
-    expect(NumberOfEventsWrapper.find('#number-of-events__label')).toHaveLength(1);
-  });
+    if (value <= 0) {
+      this.setState({
+        numberEvents: value,
+        errorText: 'Please select a number from 1 to 32 only.'
+      })
+    } else if (value > 32) {
+      this.setState({
+        numberEvents: value,
+        errorText: 'Please select a number from 1 to 32 only.'
+      })
+    } else {
+      this.setState({
+        numberEvents: value,
+        errorText: ''
+      })
+    }
+    this.props.updateEventNumber(event);
+  }
 
-  test('render number of events input', () => {
-    expect(NumberOfEventsWrapper.find('#number-of-events__input')).toHaveLength(1);
-  })
+  render() {
+    return (
+      <div className='NumberOfEvents'>
+        <label htmlFor='numberOfEvent'>Number of Events</label>
+        <br></br>
+        <input
+          type="number"
+          className="numberInput"
+          value={this.state.numberEvents}
+          onChange={this.handleInputChange}
+        />
+        <ErrorAlert text={this.state.errorText} />
+      </div>
+    );
+  }
+}
 
-  test('renders input number correctly', () => {
-    const number = NumberOfEventsWrapper.state('number');
-    expect(NumberOfEventsWrapper.find('#number-of-events__input').prop('value')).toBe(number);
-  })
-
-  test('change state when number input changes', () => {
-    NumberOfEventsWrapper.setState({
-      number: '32'
-    });
-    const eventObject = { target: { value: '15' }};
-    NumberOfEventsWrapper.find('#number-of-events__input').simulate('change', eventObject);
-    expect(NumberOfEventsWrapper.state('number')).toBe('15');
-  })
-
-  test('ignore text input of non-numeric values - test-1', () => {
-    const eventObject = { target: { value: '15a' }};
-    NumberOfEventsWrapper.find('#number-of-events__input').simulate('change', eventObject);
-    expect(NumberOfEventsWrapper.state('number')).toBe('15');
-  })
-
-  test('ignore text input of non-numeric values - test-2', () => {
-    const eventObject = { target: { value: '1_5' }};
-    NumberOfEventsWrapper.find('#number-of-events__input').simulate('change', eventObject);
-    expect(NumberOfEventsWrapper.state('number')).toBe('15');
-  })
-
-  test('ignore text input of non-numeric values - test-3', () => {
-    const eventObject = { target: { value: '-x1_5~' }};
-    NumberOfEventsWrapper.find('#number-of-events__input').simulate('change', eventObject);
-    expect(NumberOfEventsWrapper.state('number')).toBe('15');
-  })
-
-});
+export default NumberOfEvents;

@@ -8,25 +8,28 @@ class Alert extends Component {
 
   getStyle = () => {
     return {
-      color: this.color
-    };
+      color: this.color,
+    }
   }
 
   render() {
     return (
       <div className="Alert">
-        <p style={this.getStyle()} className="error-text">{this.props.text}</p>
+        <p style={this.getStyle()}>{this.props.text}</p>
       </div>
     );
   }
+
 }
 
 class InfoAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'yellow';
+    this.color = 'blue';
   }
 }
+
+
 
 class ErrorAlert extends Alert {
   constructor(props) {
@@ -35,18 +38,14 @@ class ErrorAlert extends Alert {
   }
 }
 
-class WarningAlert extends Alert {
-  constructor(props) {
-    super(props);
-    this.color = 'orange';
-  }
-}
+
 
 class OfflineAlert extends Alert {
   constructor(props) {
-      super(props);
-      this.color = '#FFFF00';
+    super(props);
+    this.color = 'fc1303';
   }
+
 }
 
-export { InfoAlert, ErrorAlert, WarningAlert, OfflineAlert };
+export { InfoAlert, ErrorAlert, OfflineAlert }
